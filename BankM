@@ -1,0 +1,236 @@
+import java.util.Scanner;
+
+class Bank {
+    private String[] firstName = new String[20];
+    private String[] lastName = new String[20];
+    private String[] phone = new String[20];
+    private String[] email = new String[20];
+    private String[] username = new String[20];
+    private String[] password = new String[20];
+    private int[] transaction = new int[20];
+    private int accountCount;
+
+    public Bank() {
+        accountCount = 0;
+    }
+
+    public void data(int choice) {
+        Scanner sc = new Scanner(System.in);
+
+        if (choice == 1) {
+            System.out.println("How many accounts do you want to create?");
+            int numAccounts = sc.nextInt();
+            sc.nextLine(); // Consume newline
+
+            if (accountCount == 0) {
+                accountCount += numAccounts;
+                for (int i = 0; i < numAccounts; i++) {
+                    System.out.println("\n\t----Enter Data----");
+                    System.out.print("Enter first name: ");
+                    firstName[i] = sc.nextLine();
+                    System.out.print("Enter last name: ");
+                    lastName[i] = sc.nextLine();
+                    System.out.print("Enter phone number: ");
+                    phone[i] = sc.nextLine();
+                    System.out.print("Enter email: ");
+                    email[i] = sc.nextLine();
+                    System.out.print("Enter username: ");
+                    username[i] = sc.nextLine();
+                    System.out.print("Enter password: ");
+                    password[i] = sc.nextLine();
+                    System.out.print("Enter transaction amount: ");
+                    transaction[i] = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                }
+                System.out.println("New accounts created!");
+            } else {
+                for (int i = accountCount; i < accountCount + numAccounts; i++) {
+                    System.out.println("\n\t----Enter Data----");
+                    System.out.print("Enter first name: ");
+                    firstName[i] = sc.nextLine();
+                    System.out.print("Enter last name: ");
+                    lastName[i] = sc.nextLine();
+                    System.out.print("Enter phone number: ");
+                    phone[i] = sc.nextLine();
+                    System.out.print("Enter email: ");
+                    email[i] = sc.nextLine();
+                    System.out.print("Enter username: ");
+                    username[i] = sc.nextLine();
+                    System.out.print("Enter password: ");
+                    password[i] = sc.nextLine();
+                    System.out.print("Enter transaction amount: ");
+                    transaction[i] = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                }
+                accountCount += numAccounts;
+                System.out.println("New accounts created!");
+            }
+
+        } else if (choice == 2) {
+            if (accountCount == 0) {
+                System.out.println("No data is entered.");
+            } else {
+                System.out.print("Enter username to update: ");
+                String user = sc.nextLine();
+                for (int i = 0; i < accountCount; i++) {
+                    if (user.equals(username[i])) {
+                        System.out.println("\t\n---Old Data---");
+                        System.out.println("First Name: " + firstName[i]);
+                        System.out.println("Last Name: " + lastName[i]);
+                        System.out.println("Phone: " + phone[i]);
+                        System.out.println("Email: " + email[i]);
+                        System.out.println("Username: " + username[i]);
+                        System.out.println("Transaction: " + transaction[i]);
+                        System.out.println("\nEnter new data:");
+                        System.out.print("Enter first name: ");
+                        firstName[i] = sc.nextLine();
+                        System.out.print("Enter last name: ");
+                        lastName[i] = sc.nextLine();
+                        System.out.print("Enter phone number: ");
+                        phone[i] = sc.nextLine();
+                        System.out.print("Enter email: ");
+                        email[i] = sc.nextLine();
+                        System.out.print("Enter username: ");
+                        username[i] = sc.nextLine();
+                        System.out.print("Enter transaction amount: ");
+                        transaction[i] = sc.nextInt();
+                        sc.nextLine(); // Consume newline
+                        break;
+                    }
+                }
+            }
+
+        } else if (choice == 3) {
+            if (accountCount == 0) {
+                System.out.println("No data is entered.");
+            } else {
+                System.out.print("Enter username to check details: ");
+                String user = sc.nextLine();
+                for (int i = 0; i < accountCount; i++) {
+                    if (user.equals(username[i])) {
+                        System.out.println("\n\t----Data----");
+                        System.out.println("First Name: " + firstName[i]);
+                        System.out.println("Last Name: " + lastName[i]);
+                        System.out.println("Phone: " + phone[i]);
+                        System.out.println("Email: " + email[i]);
+                        System.out.println("Username: " + username[i]);
+                        System.out.println("Transaction: " + transaction[i]);
+                        break;
+                    }
+                }
+            }
+
+        } else if (choice == 4) {
+            if (accountCount == 0) {
+                System.out.println("No data is entered.");
+            } else {
+                System.out.print("Enter username for transaction: ");
+                String user = sc.nextLine();
+                for (int i = 0; i < accountCount; i++) {
+                    if (user.equals(username[i])) {
+                        System.out.println("\n\t----Data----");
+                        System.out.println("First Name: " + firstName[i]);
+                        System.out.println("Transaction: " + transaction[i]);
+                        System.out.print("Press 1 for deposit, 2 for withdrawal: ");
+                        int transChoice = sc.nextInt();
+                        sc.nextLine(); // Consume newline
+                        if (transChoice == 1) {
+                            System.out.print("Enter deposit amount: ");
+                            int deposit = sc.nextInt();
+                            transaction[i] += deposit;
+                            System.out.println(deposit + " added to account.");
+                        } else if (transChoice == 2) {
+                            System.out.print("Enter withdrawal amount: ");
+                            int withdraw = sc.nextInt();
+                            transaction[i] -= withdraw;
+                            System.out.println(withdraw + " withdrawn from account.");
+                        } else {
+                            System.out.println("Invalid input.");
+                        }
+                        break;
+                    }
+                }
+            }
+
+        } else if (choice == 5) {
+            if (accountCount == 0) {
+                System.out.println("No data is entered.");
+            } else {
+                System.out.print("Press 1 to delete specific record, 2 to delete all records: ");
+                int deleteChoice = sc.nextInt();
+                sc.nextLine(); // Consume newline
+                if (deleteChoice == 1) {
+                    System.out.print("Enter username to delete: ");
+                    String user = sc.nextLine();
+                    for (int i = 0; i < accountCount; i++) {
+                        if (user.equals(username[i])) {
+                            for (int j = i; j < accountCount - 1; j++) {
+                                firstName[j] = firstName[j + 1];
+                                lastName[j] = lastName[j + 1];
+                                phone[j] = phone[j + 1];
+                                email[j] = email[j + 1];
+                                username[j] = username[j + 1];
+                                password[j] = password[j + 1];
+                                transaction[j] = transaction[j + 1];
+                            }
+                            accountCount--;
+                            System.out.println("Record deleted.");
+                            break;
+                        }
+                    }
+                } else if (deleteChoice == 2) {
+                    accountCount = 0;
+                    System.out.println("All records deleted.");
+                } else {
+                    System.out.println("Invalid input.");
+                }
+            }
+
+        } else if (choice == 6) {
+            if (accountCount == 0) {
+                System.out.println("No data is entered.");
+            } else {
+                System.out.println("\n\t----Customer List----");
+                for (int i = 0; i < accountCount; i++) {
+                    System.out.println("\nData of person " + (i + 1));
+                    System.out.println("First Name: " + firstName[i]);
+                    System.out.println("Last Name: " + lastName[i]);
+                    System.out.println("Phone: " + phone[i]);
+                    System.out.println("Email: " + email[i]);
+                    System.out.println("Username: " + username[i]);
+                    System.out.println("Transaction: " + transaction[i]);
+                }
+            }
+
+        } else if (choice == 7) {
+            System.out.println("Thank you!");
+            System.exit(0);
+        } else {
+            System.out.println("Invalid input.");
+        }
+    }
+}
+
+public class BankM{
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Bank bank = new Bank();
+
+        while (true) {
+            System.out.println("\nBANK MANAGEMENT SYSTEM");
+            System.out.println("1. Create new account");
+            System.out.println("2. Update information of existing account");
+            System.out.println("3. Check the details of an existing account");
+            System.out.println("4. For transactions");
+            System.out.println("5. Remove existing account");
+            System.out.println("6. View customers list");
+            System.out.println("7. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+            sc.nextLine(); // Consume newline
+
+            bank.data(choice);
+        }
+    }
+}
