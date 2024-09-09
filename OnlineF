@@ -1,0 +1,119 @@
+import java.util.Scanner;
+
+public class OnlineF {
+    public static void main(String[] args) {
+        int totalBill = returnTotalBill();
+        System.out.println("Your Total Bill Amount Is: " + totalBill);
+        System.out.println("Thank you for your order!");
+    }
+
+    public static int returnTotalBill() {
+        Scanner scanner = new Scanner(System.in);
+        char c;
+        char item;
+        char vegItem;
+        int billAmount = 0;
+        char selectAgain;
+        char nonvegItem;
+
+        System.out.println("-------------Welcome To Online Food Order----------");
+        System.out.println("------------Please Follow Below Instruction----------");
+        System.out.println("Step 1 : Please press s to start your order");
+        System.out.println("Step 2 : You can order both Veg and Nonveg items");
+        System.out.println("Step 3 : Please press a to select veg item");
+        System.out.println("Step 4 : Please press b to select Nonveg item");
+        System.out.println("Step 5 : You will get your final Bill after your order");
+
+        start:
+        c = scanner.next().charAt(0);
+        if (c == 's' || c == 'S') {
+            items:
+            while (true) {
+                System.out.println("Please select your choice");
+                System.out.println("(a) Veg Item              (b) Nonveg Item");
+                item = scanner.next().charAt(0);
+
+                if (item == 'a' || item == 'A') {
+                    vegItemList:
+                    while (true) {
+                        System.out.println("Please select 1, 2, 3, 4, 5 as per your choice");
+                        System.out.println("(1) Paneer Masala : Price : Rs -150");
+                        System.out.println("(2) Paneer Angaar : Price : Rs -180");
+                        System.out.println("(3) Veg Koliwada : Price : Rs -170");
+                        System.out.println("(4) Veg Maratha : Price : Rs -190");
+                        System.out.println("(5) Baigaan Masala : Price : Rs -200");
+
+                        vegItem = scanner.next().charAt(0);
+                        switch (vegItem) {
+                            case '1':
+                                billAmount += 150;
+                                break;
+                            case '2':
+                                billAmount += 180;
+                                break;
+                            case '3':
+                                billAmount += 170;
+                                break;
+                            case '4':
+                                billAmount += 190;
+                                break;
+                            case '5':
+                                billAmount += 200;
+                                break;
+                            default:
+                                System.out.println("You have entered the wrong value, please try again");
+                                continue vegItemList;
+                        }
+                        break;
+                    }
+                } else if (item == 'b' || item == 'B') {
+                    nonvegItemList:
+                    while (true) {
+                        System.out.println("Please select 1, 2, 3, 4, 5 as per your choice");
+                        System.out.println("(1) Chicken Chilly : Price : Rs -250");
+                        System.out.println("(2) Chicken Biryani : Price : Rs - 140");
+                        System.out.println("(3) Mutton Biryani : Price : Rs - 200");
+                        System.out.println("(4) Chicken Masala : Price : Rs -210");
+                        System.out.println("(5) Mutton Handi : Price : Rs -400");
+
+                        nonvegItem = scanner.next().charAt(0);
+                        switch (nonvegItem) {
+                            case '1':
+                                billAmount += 250;
+                                break;
+                            case '2':
+                                billAmount += 140;
+                                break;
+                            case '3':
+                                billAmount += 200;
+                                break;
+                            case '4':
+                                billAmount += 210;
+                                break;
+                            case '5':
+                                billAmount += 400;
+                                break;
+                            default:
+                                System.out.println("You have entered the wrong value, please try again");
+                                continue nonvegItemList;
+                        }
+                        break;
+                    }
+                } else {
+                    System.out.println("You have entered the wrong value, please try again");
+                    continue items;
+                }
+
+                System.out.println("Do you want to add more items, y or n?");
+                selectAgain = scanner.next().charAt(0);
+                if (selectAgain != 'y') {
+                    return billAmount;
+                }
+            }
+        } else {
+            System.out.println("You have entered the wrong value, please press s!");
+            
+        }
+        return billAmount;
+    }
+}
